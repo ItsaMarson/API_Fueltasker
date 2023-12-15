@@ -23,4 +23,10 @@ public class CustomExceptionHandler {
         CustomErrorResponse errorResponse = new CustomErrorResponse(ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(EmailAlreadyTakenException.class)
+    public ResponseEntity<CustomErrorResponse> handleEmailAlreadyTaken(EmailAlreadyTakenException ex){
+        CustomErrorResponse errorResponse = new CustomErrorResponse(ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

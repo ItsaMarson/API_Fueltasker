@@ -101,4 +101,9 @@ public class FuelTasker {
     public List<Users> getAllUsers(){
         return userserv.getAllUsers();
     }
+
+    @PutMapping("/updateUser")
+    public Users updateUsers(@RequestParam String email, @RequestBody Users users){
+        return userserv.updateUsers(email, users);
+    }
 }
