@@ -12,8 +12,9 @@ public class CustomizationExpenses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ceID;
+
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
+    @JoinColumn(name = "userID", nullable = true)
     private Users users;
     private String title;
     private double price;
@@ -21,21 +22,35 @@ public class CustomizationExpenses {
 
     public CustomizationExpenses(){super();}
 
-    public CustomizationExpenses(int ceID, String title, double price, String date) {
+    
+    
+
+    public CustomizationExpenses(int ceID, Users users, String title, double price, String date) {
         this.ceID = ceID;
+        this.users = users;
         this.title = title;
         this.price = price;
         this.date = date;
     }
 
+
+
+
     public int getCeID() {
         return ceID;
     }
 
-    public void setVo_id(int ceID) {
+    public void setCeID(int ceID) {
         this.ceID = ceID;
     }
 
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 
     public String getTitle() {
         return title;

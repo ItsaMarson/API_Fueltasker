@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fueltasker.fueltasker.Entity.CarwashExpenses;
+import com.fueltasker.fueltasker.Entity.CustomizationExpenses;
+import com.fueltasker.fueltasker.Entity.MaintenanceExpenses;
+import com.fueltasker.fueltasker.Entity.MonthlyExpenses;
 import com.fueltasker.fueltasker.Entity.Reminder;
 import com.fueltasker.fueltasker.Entity.ToDoList;
 import com.fueltasker.fueltasker.Entity.Users;
 import com.fueltasker.fueltasker.Entity.VehicleOwner;
 import com.fueltasker.fueltasker.Service.CarwashExpensesService;
+import com.fueltasker.fueltasker.Service.CustomizationExpensesService;
+import com.fueltasker.fueltasker.Service.MaintenanceExpensesService;
+import com.fueltasker.fueltasker.Service.MonthlyExpensesService;
 import com.fueltasker.fueltasker.Service.ReminderService;
 import com.fueltasker.fueltasker.Service.ToDoListService;
 import com.fueltasker.fueltasker.Service.UserService;
@@ -42,6 +48,16 @@ public class FuelTasker {
     @Autowired
     CarwashExpensesService carwashserv;
 
+    @Autowired
+    MaintenanceExpensesService maintenanceExpensesService;
+
+    @Autowired
+    CustomizationExpensesService customservice;
+
+    @Autowired
+    MonthlyExpensesService monthlyserv;
+
+    /// Vehicle Owners
     @GetMapping("/getAllVehicleOwners")
     public List<VehicleOwner> getAllOwners(){
         return veserv.getAllOwners();
@@ -54,6 +70,18 @@ public class FuelTasker {
     public VehicleOwner insertVehicleOwner(@RequestBody VehicleOwner vOwner){
         return veserv.insertVehicleOwner(vOwner);
     }
+    @PutMapping("/updateVehicleOwner")
+    public VehicleOwner updatVehicleOwner(@RequestParam int vo_id, @RequestBody VehicleOwner nVehicleOwner){
+        return veserv.updateVehicleOwner(vo_id, nVehicleOwner);
+    }
+    
+    @DeleteMapping("/deleteVehicleOwner/{vo_id}")
+    public String deleteVehicleOwner(@PathVariable int vo_id){
+        return veserv.deleteVehicleOwner(vo_id);
+    }
+
+
+    /// Reminder Features
     @GetMapping("/getAllReminders")
     public List<Reminder> getAllReminders(){
         return reserv.getAllReminders();
@@ -66,23 +94,19 @@ public class FuelTasker {
     public List<Reminder> getByTitle(@PathVariable String title){
         return reserv.getByTitle(title);
     }
-    @PutMapping("/updateReminder")
-    public Reminder updateReminder(@RequestParam String title, @RequestBody Reminder newDetailsReminder){
-        return reserv.updateReminder(title, newDetailsReminder);
-    }
-    @PutMapping("/updateVehicleOwner")
-    public VehicleOwner updatVehicleOwner(@RequestParam int vo_id, @RequestBody VehicleOwner nVehicleOwner){
-        return veserv.updateVehicleOwner(vo_id, nVehicleOwner);
-    }
     @DeleteMapping("/deleteReminder/{title}")
     public String deleteReminder(@PathVariable String title){
         return reserv.deleteReminder(title);
     }
-
-    @DeleteMapping("/deleteVehicleOwner/{vo_id}")
-    public String deleteVehicleOwner(@PathVariable int vo_id){
-        return veserv.deleteVehicleOwner(vo_id);
+    @PutMapping("/updateReminder")
+    public Reminder updateReminder(@RequestParam String title, @RequestBody Reminder newDetailsReminder){
+        return reserv.updateReminder(title, newDetailsReminder);
     }
+    
+    
+
+
+    ///ToDoList Features
     @DeleteMapping("deleteTask/{taskname}")
     public String deleteTask(@PathVariable String taskname){
         return todoserv.deleteTask(taskname);
@@ -97,6 +121,8 @@ public class FuelTasker {
         return todoserv.createTask(toDoList);
     }
 
+
+    ///Users ------
     @PostMapping("/registerUser")
     public Users registerUser(@RequestBody Users users){
         return userserv.createUser(users);
@@ -112,13 +138,56 @@ public class FuelTasker {
         return userserv.updateUsers(email, users);
     }
 
-    @GetMapping("/carwashexpenses")
-    public List<CarwashExpenses> getAllExpenses(){
-        return carwashserv.getAllCarwashExpenses();
+
+
+    //MonthlyExpenses Features------  MaintenanceExpenses
+    @GetMapping("/maintenanceexpenses")
+    public List<MaintenanceExpenses> getAllMaintenanceExpenses(){
+        return maintenanceExpensesService.getAllMaintenanceExpenses();
+    }
+    @PostMapping("/addDataMaintenance")
+    public MaintenanceExpenses addDataMaintenanceExpenses(@RequestBody MaintenanceExpenses maintenanceExpenses){
+        return maintenanceExpensesService.addData(maintenanceExpenses);
+    }
+    @DeleteMapping("/{title}")
+    public String deleteMaintenance(@PathVariable String title){
+        return maintenanceExpensesService.deleteMaintenanceExpenses(title);
     }
 
-    @PostMapping("/addData")
-    public CarwashExpenses addDataCarwash(CarwashExpenses carwashExpenses){
+
+    //MonthlyExpenses Features ---- CarwashExpenses
+    @GetMapping("/carwashexpenses")
+    public List<CarwashExpenses> getAllCarwashExpenses(){
+        return carwashserv.getAllCarwashExpenses();
+    }
+    @PostMapping("/addDataCarwash")
+    public CarwashExpenses addDataCarwash(@RequestBody CarwashExpenses carwashExpenses){
         return carwashserv.addDataCarwashExpenses(carwashExpenses);
     }
+    @DeleteMapping("/deleteCarwashExpenses/{title}")
+    public String deleteCarwash(@PathVariable String title){
+        return carwashserv.deleteCarwashExpenses(title);
+    }
+
+
+    //MonthlyExpenses Features ---- CustomizationExpenses
+    @GetMapping("/customizationexpenses")
+    public List<CustomizationExpenses> getAllCustomizationExpenses(){
+        return customservice.getAllCustomizationExpenses();
+    }
+    @PostMapping("/addDataCustomization")
+    public CustomizationExpenses addDataCarwash(CustomizationExpenses customizationExpenses){
+        return customservice.addData(customizationExpenses);
+    }
+    @DeleteMapping("/deleteCustomizationExpenses/{title}")
+    public String deleteCustomization(@PathVariable String title){
+        return customservice.deleteCustomizationExpenses(title);
+    }
+
+    //MonthlyExpenses Feature
+    @GetMapping("/monthlyexpenses")
+    public List<MonthlyExpenses> getAllMonthlyExpenses(){
+        return monthlyserv.getAllMonthlyExpenses();
+    }
+
 }

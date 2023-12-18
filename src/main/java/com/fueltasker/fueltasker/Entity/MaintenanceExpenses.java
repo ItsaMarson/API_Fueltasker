@@ -13,7 +13,7 @@ public class MaintenanceExpenses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int meID;
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
+    @JoinColumn(name = "userID", nullable = true)
     private Users users;
     private String title;
     private double price;

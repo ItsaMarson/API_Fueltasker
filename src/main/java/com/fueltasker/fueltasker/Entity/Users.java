@@ -22,14 +22,50 @@ public class Users {
    
     private String pWord;
 
+    private String phonenumber;
+
+    private String dateofbirth;
+
     public Users(){super();}
 
-    public Users(String fName, String lName, String eMail, String pWord) {
+    
+
+    public Users(int userID, String fName, String lName, String eMail, String pWord, String phonenumber,
+            String dateofbirth) {
+        this.userID = userID;
         this.fName = fName;
         this.lName = lName;
         this.eMail = eMail;
         this.pWord = pWord;
+        this.phonenumber = phonenumber;
+        this.dateofbirth = dateofbirth;
     }
+
+    
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+
+
+    public String getDateofbirth() {
+        return dateofbirth;
+    }
+
+
+
+    public void setDateofbirth(String dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+
 
     public int getUserID() {
         return userID;
