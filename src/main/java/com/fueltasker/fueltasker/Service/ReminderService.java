@@ -21,7 +21,6 @@ public class ReminderService {
     public List<Reminder> getByTitle(String title){
         return rerep.findByTitle(title);
     }
-
     public Reminder createReminder(Reminder reminder){
         List<Reminder> foundTitle = rerep.findByTitle(reminder.getTitle());
 

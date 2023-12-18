@@ -20,7 +20,7 @@ public class UserService {
         return userrep.findAll();
     }
     public Users updateUsers(String email, Users userNewDetails){
-        List<Users> emailfound = userrep.findByEmail(email);
+        List<Users> emailfound = userrep.findByeMail(email);
 
             if (!emailfound.isEmpty()) {
             throw new EmailAlreadyTakenException("Reminder with title '" + email + "' does not exist");

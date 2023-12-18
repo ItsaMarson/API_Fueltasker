@@ -12,18 +12,19 @@ import jakarta.persistence.Table;
 public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int titleID;
     private String title;
     private String description;
     private String timestart;
     private String date;
     public Reminder(){super();}
+    
     public Reminder(String title, String description, String timestart, String date) {
         this.title = title;
         this.description = description;
         this.timestart = timestart;
         this.date = date;
     }
+    
     public String getTitle() {
         return title;
     }
