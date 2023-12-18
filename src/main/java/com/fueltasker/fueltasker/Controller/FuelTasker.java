@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fueltasker.fueltasker.Entity.CarwashExpenses;
 import com.fueltasker.fueltasker.Entity.Reminder;
 import com.fueltasker.fueltasker.Entity.ToDoList;
 import com.fueltasker.fueltasker.Entity.Users;
 import com.fueltasker.fueltasker.Entity.VehicleOwner;
+import com.fueltasker.fueltasker.Service.CarwashExpensesService;
 import com.fueltasker.fueltasker.Service.ReminderService;
 import com.fueltasker.fueltasker.Service.ToDoListService;
 import com.fueltasker.fueltasker.Service.UserService;
@@ -36,7 +38,10 @@ public class FuelTasker {
 
     @Autowired
     UserService userserv;
-    
+
+    @Autowired
+    CarwashExpensesService carwashserv;
+
     @GetMapping("/getAllVehicleOwners")
     public List<VehicleOwner> getAllOwners(){
         return veserv.getAllOwners();
@@ -105,5 +110,15 @@ public class FuelTasker {
     @PutMapping("/updateUser")
     public Users updateUsers(@RequestParam String email, @RequestBody Users users){
         return userserv.updateUsers(email, users);
+    }
+
+    @GetMapping("/carwashexpenses")
+    public List<CarwashExpenses> getAllExpenses(){
+        return carwashserv.getAllCarwashExpenses();
+    }
+
+    @PostMapping("/addData")
+    public CarwashExpenses addDataCarwash(CarwashExpenses carwashExpenses){
+        return carwashserv.addDataCarwashExpenses(carwashExpenses);
     }
 }
