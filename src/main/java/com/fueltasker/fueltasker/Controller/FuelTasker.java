@@ -134,8 +134,8 @@ public class FuelTasker {
     }
 
     @PutMapping("/updateUser")
-    public Users updateUsers(@RequestParam String email, @RequestBody Users users){
-        return userserv.updateUsers(email, users);
+    public Users updateUsers(@RequestParam int userID, @RequestBody Users users){
+        return userserv.updateUsers(userID, users);
     }
 
 

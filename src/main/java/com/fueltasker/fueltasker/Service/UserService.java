@@ -20,19 +20,23 @@ public class UserService {
     public List<Users> getAllUsers(){
         return userrep.findAll();
     }
-    public Users updateUsers(String email, Users userNewDetails){
-        List<Users> emailfound = userrep.findByeMail(email);
-
-            if (!emailfound.isEmpty()) {
-            throw new EmailAlreadyTakenException("Reminder with title '" + email + "' does not exist");
-        }
-            Users users = emailfound.get(0);
+    @SuppressWarnings("finally")
+    public Users updateUsers(int userID, Users userNewDetails){
+        Users users = new Users();
+        try {
+            users = userrep.findById(userID).get();
             users.setfName(userNewDetails.getfName());
             users.setlName(userNewDetails.getlName());
             users.seteMail(userNewDetails.geteMail());
             users.setpWord(userNewDetails.getpWord());
-         
+            users.setPhonenumber((userNewDetails.getPhonenumber()));
+            users.setDateofbirth(userNewDetails.getDateofbirth());
+        }catch (NoSuchElementException e){
+            throw new EmailAlreadyTakenException("Users "+userID+"does not Existed!");
+        }finally{
             return userrep.save(users);
+        }
+            
     }
     public Users getUserById(int userId) {
         return userrep.findById(userId).orElse(null);

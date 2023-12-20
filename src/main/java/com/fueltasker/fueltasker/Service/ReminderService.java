@@ -26,9 +26,9 @@ public class ReminderService {
 
         if(!foundTitle.isEmpty()){
             throw new ReminderAlreadyTaken("Reminder with title '" + reminder.getTitle() + "' already exists");
-        }else{
-            return rerep.save(reminder);
         }
+            return rerep.save(reminder);
+        
     }
     public Reminder updateReminder(String title, Reminder newDetailsReminder) {
         List<Reminder> remind = rerep.findByTitle(title);
