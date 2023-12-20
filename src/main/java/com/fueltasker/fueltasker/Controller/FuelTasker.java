@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fueltasker.fueltasker.Entity.CarwashExpenses;
 import com.fueltasker.fueltasker.Entity.CustomizationExpenses;
+import com.fueltasker.fueltasker.Entity.GasConsumption;
 import com.fueltasker.fueltasker.Entity.MaintenanceExpenses;
 import com.fueltasker.fueltasker.Entity.MonthlyExpenses;
 import com.fueltasker.fueltasker.Entity.Reminder;
@@ -23,6 +24,7 @@ import com.fueltasker.fueltasker.Entity.Users;
 import com.fueltasker.fueltasker.Entity.VehicleOwner;
 import com.fueltasker.fueltasker.Service.CarwashExpensesService;
 import com.fueltasker.fueltasker.Service.CustomizationExpensesService;
+import com.fueltasker.fueltasker.Service.GasConsumptionService;
 import com.fueltasker.fueltasker.Service.MaintenanceExpensesService;
 import com.fueltasker.fueltasker.Service.MonthlyExpensesService;
 import com.fueltasker.fueltasker.Service.ReminderService;
@@ -56,6 +58,9 @@ public class FuelTasker {
 
     @Autowired
     MonthlyExpensesService monthlyserv;
+
+    @Autowired
+    GasConsumptionService gasserv;
 
     /// Vehicle Owners
     @GetMapping("/getAllVehicleOwners")
@@ -189,9 +194,17 @@ public class FuelTasker {
     public List<MonthlyExpenses> getAllMonthlyExpenses(){
         return monthlyserv.getAllMonthlyExpenses();
     }
-    @GetMapping("/getAllCarwashExpenses")
-    public List<CarwashExpenses> getAllCarwashExpenses1(){
-        return monthlyserv.getAllCarwashExpenses();
+
+
+
+    //GasConsumption Feature
+    @GetMapping("/getAllGasConsumption")
+    public List<GasConsumption> getAllGasComsuption(){
+        return gasserv.getAllGasConsumption();
+    }
+    @PostMapping("/addDataGasConsumption")
+    public GasConsumption addDataGasConsumption(@RequestBody GasConsumption gasConsumption){
+        return gasserv.addDataGasConsumption(gasConsumption);
     }
 
 }
