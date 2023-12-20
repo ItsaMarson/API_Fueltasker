@@ -13,7 +13,11 @@ public class MonthlyExpensesService {
     @Autowired
     MonthlyServiceRepository monthlyrep;
 
+    @Autowired
+    MaintenanceExpensesService maintenanceExpensesService;
+
     public List<MonthlyExpenses> getAllMonthlyExpenses(){
         return monthlyrep.findAll();
     }
+
 }

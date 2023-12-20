@@ -14,6 +14,7 @@ public class UserService {
     UsersRepository userrep;
 
     public Users createUser(Users users){
+        users.seteMail(users.geteMail());
         return userrep.save(users);
     }
     public List<Users> getAllUsers(){
@@ -32,7 +33,8 @@ public class UserService {
             users.setpWord(userNewDetails.getpWord());
          
             return userrep.save(users);
-        
     }
-    
+    public Users getUserById(int userId) {
+        return userrep.findById(userId).orElse(null);
+    }
 }

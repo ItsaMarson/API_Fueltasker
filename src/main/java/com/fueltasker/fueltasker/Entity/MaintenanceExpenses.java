@@ -4,21 +4,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class MaintenanceExpenses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int meID;
-    @ManyToOne
-    @JoinColumn(name = "userID", nullable = true)
-    private Users users;
+    
     private String title;
     private double price;
     private String date;
-    public MaintenanceExpenses(int meID, Users users, String title, double price, String date) {super();
+
+    
+    
+    public MaintenanceExpenses() {super();
+    }
+    public MaintenanceExpenses(int meID, String title, double price, String date) {
         this.meID = meID;
         this.title = title;
         this.price = price;
@@ -48,7 +50,4 @@ public class MaintenanceExpenses {
     public void setDate(String date) {
         this.date = date;
     }
-
-    
-
 }
