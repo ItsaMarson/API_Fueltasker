@@ -1,5 +1,7 @@
 package com.fueltasker.fueltasker.Entity;
 
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +18,11 @@ public class CarwashExpenses {
     private double price;
     private String date;
 
+    
+    
     public CarwashExpenses(){super();}
 
+    
     
 
     public CarwashExpenses(int ceID,String title, double price, String date) {

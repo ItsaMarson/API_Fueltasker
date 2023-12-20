@@ -134,8 +134,8 @@ public class FuelTasker {
     }
 
     @PutMapping("/updateUser")
-    public Users updateUsers(@RequestParam int userID, @RequestBody Users users){
-        return userserv.updateUsers(userID, users);
+    public Users updateUsers(@RequestParam String email, @RequestBody Users users){
+        return userserv.updateUsers(email, users);
     }
 
 
@@ -188,6 +188,10 @@ public class FuelTasker {
     @GetMapping("/monthlyexpenses")
     public List<MonthlyExpenses> getAllMonthlyExpenses(){
         return monthlyserv.getAllMonthlyExpenses();
+    }
+    @GetMapping("/getAllCarwashExpenses")
+    public List<CarwashExpenses> getAllCarwashExpenses1(){
+        return monthlyserv.getAllCarwashExpenses();
     }
 
 }
