@@ -36,7 +36,5 @@ public class UserService {
 
             return userrep.save(existingUsers);
     }
-    public Users getUserById(int userId) {
-        return userrep.findById(userId).orElse(null);
-    }
+    
 }
