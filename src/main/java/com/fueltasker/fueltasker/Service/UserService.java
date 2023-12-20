@@ -14,27 +14,29 @@ public class UserService {
     UsersRepository userrep;
 
     public Users createUser(Users users){
+        users.seteMail(users.geteMail());
         return userrep.save(users);
     }
     public List<Users> getAllUsers(){
         return userrep.findAll();
     }
-    public Users updateUsers(String email, Users userNewDetails){
-        List<Users> emailfound = userrep.findByeMail(email);
-    
-        if (emailfound.isEmpty()) {
-            throw new EmailAlreadyTakenException("User with email '" + email + "' does not exist");
+    @SuppressWarnings("finally")
+    public Users updateUsers(int userID, Users userNewDetails){
+        Users users = new Users();
+        try {
+            users = userrep.findById(userID).get();
+            users.setfName(userNewDetails.getfName());
+            users.setlName(userNewDetails.getlName());
+            users.seteMail(userNewDetails.geteMail());
+            users.setpWord(userNewDetails.getpWord());
+            users.setPhonenumber((userNewDetails.getPhonenumber()));
+            users.setDateofbirth(userNewDetails.getDateofbirth());
+        }catch (NoSuchElementException e){
+            throw new EmailAlreadyTakenException("Users "+userID+"does not Existed!");
+        }finally{
+            return userrep.save(users);
         }
-        Users user = emailfound.get(0);
-        user.setfName(userNewDetails.getfName());
-        user.setlName(userNewDetails.getlName());
-        user.seteMail(userNewDetails.geteMail());
-        user.setpWord(userNewDetails.getpWord());
-        user.setPhonenumber(userNewDetails.getPhonenumber());
-        user.setDateofbirth(userNewDetails.getDateofbirth());
-    
-        return userrep.save(user);
+            
     }
-    
     
 }

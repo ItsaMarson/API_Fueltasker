@@ -134,8 +134,8 @@ public class FuelTasker {
     }
 
     @PutMapping("/updateUser")
-    public Users updateUsers(@RequestParam String email, @RequestBody Users users){
-        return userserv.updateUsers(email, users);
+    public Users updateUsers(@RequestParam int userID, @RequestBody Users users){
+        return userserv.updateUsers(userID, users);
     }
 
 
@@ -149,7 +149,7 @@ public class FuelTasker {
     public MaintenanceExpenses addDataMaintenanceExpenses(@RequestBody MaintenanceExpenses maintenanceExpenses){
         return maintenanceExpensesService.addData(maintenanceExpenses);
     }
-    @DeleteMapping("/{title}")
+    @DeleteMapping("/deleteMaintenanceExpenses/{title}")
     public String deleteMaintenance(@PathVariable String title){
         return maintenanceExpensesService.deleteMaintenanceExpenses(title);
     }
@@ -176,8 +176,8 @@ public class FuelTasker {
         return customservice.getAllCustomizationExpenses();
     }
     @PostMapping("/addDataCustomization")
-    public CustomizationExpenses addDataCarwash(CustomizationExpenses customizationExpenses){
-        return customservice.addData(customizationExpenses);
+    public CustomizationExpenses addDataCustomization(@RequestBody CustomizationExpenses customizationExpenses){
+        return customservice.addDataExpenses(customizationExpenses);
     }
     @DeleteMapping("/deleteCustomizationExpenses/{title}")
     public String deleteCustomization(@PathVariable String title){

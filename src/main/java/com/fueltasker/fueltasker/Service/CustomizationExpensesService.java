@@ -17,7 +17,7 @@ public class CustomizationExpensesService {
         return customrep.findAll();
     }
 
-    public CustomizationExpenses addData(CustomizationExpenses customizationExpenses){
+    public CustomizationExpenses addDataExpenses(CustomizationExpenses customizationExpenses){
         return customrep.save(customizationExpenses);
     }
 

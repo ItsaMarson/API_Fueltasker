@@ -12,6 +12,7 @@ public class MaintenanceExpensesService {
     @Autowired
     MaintenanceExpensesRepository maintenancerep;
 
+    
 
     public List<MaintenanceExpenses> getAllMaintenanceExpenses(){
         return maintenancerep.findAll();

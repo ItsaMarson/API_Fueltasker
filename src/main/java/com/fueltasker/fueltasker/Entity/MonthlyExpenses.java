@@ -1,12 +1,9 @@
 package com.fueltasker.fueltasker.Entity;
 
-import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class MonthlyExpenses {
@@ -17,11 +14,21 @@ public class MonthlyExpenses {
     private double totalpricecarwash;
     private double totalmaintenanceexpenses;
     private double totalCustomizationExpenses;
-    @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
-    private Users users;
 
-    private MonthlyExpenses(){super();}
+    
+    public MonthlyExpenses(){super();}
+
+    
+
+    public MonthlyExpenses(int meID, double totalpricecarwash, double totalmaintenanceexpenses,
+            double totalCustomizationExpenses) {
+        this.meID = meID;
+        this.totalpricecarwash = totalpricecarwash;
+        this.totalmaintenanceexpenses = totalmaintenanceexpenses;
+        this.totalCustomizationExpenses = totalCustomizationExpenses;
+    }
+
+
 
     public double getTotalpricecarwash() {
         return totalpricecarwash;
@@ -33,33 +40,27 @@ public class MonthlyExpenses {
         return totalCustomizationExpenses;
     }
 
-    public void setTotalpricecarwash(List<CarwashExpenses> carwashExpensesList) {
-        double total = 0.00;
-
-        for (CarwashExpenses carwashExpenses : carwashExpensesList) {
-            total += carwashExpenses.getPrice();
-        }
-
-        this.totalpricecarwash = total;
+    public int getMeID() {
+        return meID;
     }
 
-    public void setTotalMaintenanceExpenses(List<MaintenanceExpenses> maintenanceExpenses){
-        double total = 0.00;
-
-        for(MaintenanceExpenses maintenanceExpenses2 : maintenanceExpenses){
-            total += maintenanceExpenses2.getPrice();        
-        }
-        this.totalmaintenanceexpenses = total;
+    public void setMeID(int meID) {
+        this.meID = meID;
     }
 
-    public void setTotalCustomizationExpenses(List<CustomizationExpenses> customizationExpenses){
-        double total = 0.00;
-
-        for(CustomizationExpenses customizationExpenses2 : customizationExpenses){
-            total += customizationExpenses2.getPrice();        
-        }
-        this.totalCustomizationExpenses = total;
+    public void setTotalpricecarwash(double totalpricecarwash) {
+        this.totalpricecarwash = totalpricecarwash;
     }
+
+    public void setTotalmaintenanceexpenses(double totalmaintenanceexpenses) {
+        this.totalmaintenanceexpenses = totalmaintenanceexpenses;
+    }
+
+    public void setTotalCustomizationExpenses(double totalCustomizationExpenses) {
+        this.totalCustomizationExpenses = totalCustomizationExpenses;
+    }
+
+    
 
     
 }
