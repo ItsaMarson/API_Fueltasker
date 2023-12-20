@@ -21,18 +21,20 @@ public class UserService {
     }
     public Users updateUsers(String email, Users userNewDetails){
         List<Users> emailfound = userrep.findByeMail(email);
-
-            if (!emailfound.isEmpty()) {
-            throw new EmailAlreadyTakenException("Reminder with title '" + email + "' does not exist");
+    
+        if (emailfound.isEmpty()) {
+            throw new EmailAlreadyTakenException("User with email '" + email + "' does not exist");
         }
-            Users users = emailfound.get(0);
-            users.setfName(userNewDetails.getfName());
-            users.setlName(userNewDetails.getlName());
-            users.seteMail(userNewDetails.geteMail());
-            users.setpWord(userNewDetails.getpWord());
-         
-            return userrep.save(users);
-        
+        Users user = emailfound.get(0);
+        user.setfName(userNewDetails.getfName());
+        user.setlName(userNewDetails.getlName());
+        user.seteMail(userNewDetails.geteMail());
+        user.setpWord(userNewDetails.getpWord());
+        user.setPhonenumber(userNewDetails.getPhonenumber());
+        user.setDateofbirth(userNewDetails.getDateofbirth());
+    
+        return userrep.save(user);
     }
+    
     
 }
