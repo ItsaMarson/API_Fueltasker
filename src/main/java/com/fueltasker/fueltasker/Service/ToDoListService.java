@@ -22,6 +22,7 @@ public class ToDoListService {
     public ToDoList createTask(ToDoList todolist){
         List<ToDoList> foundtaskname = todorep.findByTaskname(todolist.getTaskname());
 
+
         if(!foundtaskname.isEmpty()){
             throw new ReminderAlreadyTaken("Task with title '" + todolist.getTaskname() + "' already exists");
         }else{
@@ -40,6 +41,7 @@ public class ToDoListService {
     
         return todorep.save(todolist);
     }
+
     public String deleteTask(String taskname){
         String msg = "";
         List<ToDoList> toDoLists = todorep.findByTaskname(taskname);

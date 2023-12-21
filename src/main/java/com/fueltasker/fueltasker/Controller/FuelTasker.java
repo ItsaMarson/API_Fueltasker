@@ -125,6 +125,10 @@ public class FuelTasker {
     public ToDoList createTask(@RequestBody ToDoList toDoList){
         return todoserv.createTask(toDoList);
     }
+    @PutMapping("/updateTask")
+    public ToDoList updateTask(@RequestParam String taskname, @RequestBody ToDoList newToDoList){
+        return todoserv.updateTask(taskname, newToDoList);
+    }
 
 
     ///Users ------
